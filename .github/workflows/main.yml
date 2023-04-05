@@ -21,7 +21,7 @@ jobs:
           python-version: 3.8
 
       - name: Install Dependencies
-        run: pip install twine setuptools # setuptools_git_versioning # -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Build Package (create)
         run: python setup.py sdist bdist_wheel
