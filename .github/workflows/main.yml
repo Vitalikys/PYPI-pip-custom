@@ -30,8 +30,10 @@ jobs:
 #    needs: [build_package_part]
 #
 #    steps:
-      - name: Print directory
-        run : ls -la
+      - name: Print directory content
+        run : |
+          ls -la
+          ls -la dist/
 
       - name: Configure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -42,7 +44,7 @@ jobs:
     
       - name: Publish Package
         run: |
-          aws s3 cp dist/* s3://aws-packages-vit
+          aws s3 cp dist/ s3://aws-packages-vit --recursive
 #          aws s3 cp   env.S3_BUCKET_NAME /awsservice1/
 
       - name: Print Status Message
