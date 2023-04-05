@@ -25,8 +25,12 @@ python setup.py sdist bdist_wheel
 This will create a dist directory containing the source distribution (*.tar.gz) and a binary distribution (*.whl).
 - Upload the package to PyPI:
 ```shell
-twine upload dist/*
+twine check dist/*
+twine upload -r pypi dist/*
 twine upload --repository testpypi dist/*
+twine upload -r testpypi dist/*
+
+
 ```
 
 

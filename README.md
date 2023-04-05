@@ -4,6 +4,8 @@
 [![version](https://img.shields.io/badge/unittest-latest-green)](https://semver.org)
 
 ## Custom package for AWS Services 
+[My custom awsservice on PYPI](https://pypi.org/project/awsservice/)
+
 [SETUPTOOLS docs](https://setuptools.pypa.io/en/latest/userguide/declarative_config.html)
 ## Getting Started
 Assuming that you have a supported version of Python installed, you can first set up your environment with:
@@ -16,7 +18,7 @@ $ . .venv/bin/activate
 
 Then, you can install aws-service from PyPI with:
 ```shell
-$ python -m pip install aws-service
+$ python -m pip install awsservice
 ```
 
 or install from S3 source with:
@@ -30,16 +32,15 @@ Set up credentials (in e.g. ~/.aws/credentials):
 
 - aws_access_key_id = YOUR_KEY
 - aws_secret_access_key = YOUR_SECRET
-- Then, set up a default region (in e.g. ~/.aws/config):
 - region=us-east-1
 
 Other credentials configuration method can be found here
 
 Then, from a Python interpreter you can import it and use its classes and functions::
 ```shell
->>> from aws_service.ec2_service import Ec2Service
->>> from aws_service.s3_service import S3Service
->>> from aws_service.cloudwatch_service import CloudwatchService
+>>> from awsservice.ec2_service import Ec2Service
+>>> from awsservice.s3_service import S3Service
+>>> from awsservice.cloudwatch_service import CloudwatchService
 >>> my_s3 = S3Service()
 >>> my_s3.create_new_bucket(bucket_name='my_new_bucket', region='eu-west-2')
 >>> my_s3.put_file( file_name='file_1', bucket='my_new_bucket', object_name='custom-name')
