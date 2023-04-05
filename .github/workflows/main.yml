@@ -45,7 +45,7 @@ jobs:
     
       - name: Publish new Packages to S3 bucket with all versions
         run: |
-          aws s3 cp dist/ env.S3_BUCKET_NAME  --recursive
+          aws s3 cp dist/ ${{ env.S3_BUCKET_NAME }} --recursive
 
       - name: Print Status Message
         run : echo "Function Updated Succesfully"
