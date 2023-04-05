@@ -21,7 +21,7 @@ jobs:
           python-version: 3.8
 
       - name: Install Dependencies
-        run: pip install twine setuptools setuptools_git_versioning # -r requirements.txt
+        run: pip install twine setuptools # setuptools_git_versioning # -r requirements.txt
 
       - name: Build Package (create)
         run: python setup.py sdist bdist_wheel
@@ -40,3 +40,6 @@ jobs:
       - name: Publish Package
         run: |
           aws s3 cp dist/*  env.S3_BUCKET_NAME
+
+      - name: Print Status Message
+        run : echo "Function Updated Succesfully"
