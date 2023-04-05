@@ -1,6 +1,6 @@
 name: Build-and-Publish-Package-to-S3
 env:
-  S3_BUCKET_NAME   : "s3://aws-packages-vit/awsservice1/"
+  S3_BUCKET_NAME   : "s3://aws-packages-vit"
   AWS_REGION_NAME  : "us-east-1"
 on:
   push:
@@ -39,7 +39,8 @@ jobs:
     
       - name: Publish Package
         run: |
-          aws s3 cp dist/*  env.S3_BUCKET_NAME
+          aws s3 cp dist/* s3://aws-packages-vit
+#          aws s3 cp   env.S3_BUCKET_NAME /awsservice1/
 
       - name: Print Status Message
         run : echo "Function Updated Succesfully"
