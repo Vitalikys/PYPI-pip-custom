@@ -25,11 +25,11 @@ jobs:
 
       - name: Build Package (create new version of package)
         run: python setup.py sdist bdist_wheel
-  push_files_to_s3:
-    runs-on: ubuntu-latest
-    needs: [build_package_part]
-
-    steps:
+#  push_files_to_s3:
+#    runs-on: ubuntu-latest
+#    needs: [build_package_part]
+#   НЕ РОЗДІЛЯЄМО, все видалиться - DELETED
+#    steps:
       - name: Print directory content
         run : |
           ls -la
