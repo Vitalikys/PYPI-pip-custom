@@ -23,13 +23,13 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Build Package (create)
+      - name: Build Package (create new version of package)
         run: python setup.py sdist bdist_wheel
-#  publish_to_s3:
-#    runs-on: ubuntu-latest
-#    needs: [build_package_part]
-#
-#    steps:
+  push_files_to_s3:
+    runs-on: ubuntu-latest
+    needs: [build_package_part]
+
+    steps:
       - name: Print directory content
         run : |
           ls -la
@@ -42,10 +42,9 @@ jobs:
           aws-secret-access-key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region           :  ${{ env.AWS_REGION_NAME }}
     
-      - name: Publish Package
+      - name: Publish new Packages to S3 bucket with all versions
         run: |
-          aws s3 cp dist/ s3://aws-packages-vit --recursive
-#          aws s3 cp   env.S3_BUCKET_NAME /awsservice1/
+          aws s3 cp dist/ s3://aws-packages-vit/awsservice1/ --recursive
 
       - name: Print Status Message
         run : echo "Function Updated Succesfully"
