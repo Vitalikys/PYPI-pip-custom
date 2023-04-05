@@ -1,0 +1,42 @@
+name: Build-and-Publish-Package-to-S3
+env:
+  S3_BUCKET_NAME   : "s3://aws-packages-vit/awsservice1/"
+  AWS_REGION_NAME  : "us-east-1"
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_package_part:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2 # можна v3 - новіша версія   (node12 --> node16)
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Dependencies
+        run: pip install twine setuptools setuptools_git_versioning # -r requirements.txt
+
+      - name: Build Package (create)
+        run: python setup.py sdist bdist_wheel
+  publish_to_s3:
+    runs-on: ubuntu-latest
+    needs: [build_package_part]
+    
+    steps:
+      - name: Configure my AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id    :  ${{ secrets.MY_AWS_ACCESS_KEY }}
+          aws-secret-access-key:  ${{ secrets.MY_AWS_SECRET_ACCESS_KEY }}
+          aws-region           :  ${{ env.AWS_REGION_NAME }}
+    
+      - name: Publish Package
+        run: |
+          aws s3 cp dist/*  env.S3_BUCKET_NAME
