@@ -1,6 +1,6 @@
 name: Build-and-Publish-Package-to-S3
 env:
-  S3_BUCKET_NAME   : "s3://aws-packages-vit"
+  S3_BUCKET_NAME   : "s3://aws-packages-vit/awsservice1/"
   AWS_REGION_NAME  : "us-east-1"
 on:
   push:
@@ -34,6 +34,7 @@ jobs:
         run : |
           ls -la
           ls -la dist/
+          uname -a
 
       - name: Configure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -44,7 +45,7 @@ jobs:
     
       - name: Publish new Packages to S3 bucket with all versions
         run: |
-          aws s3 cp dist/ s3://aws-packages-vit/awsservice1/ --recursive
+          aws s3 cp dist/ env.S3_BUCKET_NAME  --recursive
 
       - name: Print Status Message
         run : echo "Function Updated Succesfully"
