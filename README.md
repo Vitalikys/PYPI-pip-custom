@@ -3,6 +3,8 @@
 [![version](https://img.shields.io/badge/boto%5Bs3%5D-1.26.87-green)](https://semver.org)
 [![version](https://img.shields.io/badge/unittest-latest-green)](https://semver.org)
 
+[![Build-and-Publish-Package-to-S3](https://github.com/Vitalikys/PYPI-pip-custom/actions/workflows/main.yml/badge.svg)](https://github.com/Vitalikys/PYPI-pip-custom/actions/workflows/main.yml)
+
 ## Custom package for AWS Services 
 [My custom awsservice on PYPI](https://pypi.org/project/awsservice/)
 
