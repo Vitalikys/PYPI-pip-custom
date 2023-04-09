@@ -23,18 +23,12 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Create directory Media/ ; create file for tests
+      - name: Create directory Media/ ; create file_3 for running tests
         run : |
           mkdir media/
           touch ./media/file_3
           ls -la media/
           uname -a
-
-      - name: Run tests
-        run: python -m unittest tests/tests_s3service_moto.py
-
-      - name: Build Package (create new version of package)
-        run: python setup.py sdist bdist_wheel
 
       - name: Configure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -42,7 +36,13 @@ jobs:
           aws-access-key-id    :  ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region           :  ${{ env.AWS_REGION_NAME }}
-    
+
+      - name: Run tests
+        run: python -m unittest tests/tests_s3service_moto.py
+
+      - name: Build Package (create new version of package)
+        run: python setup.py sdist bdist_wheel
+
       - name: Publish new Packages to S3 bucket with all versions
         run: |
           aws s3 cp dist/ ${{ env.S3_BUCKET_NAME }} --recursive

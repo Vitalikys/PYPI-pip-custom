@@ -9,7 +9,7 @@ from awsservice.s3_service import S3Service
 class TestS3service(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.BUCKET_NAME = 'aws-packages-vit'
+        self.BUCKET_NAME = 'aws-packages-vit-2'
         self.my_service = S3Service()
 
     @mock_s3
