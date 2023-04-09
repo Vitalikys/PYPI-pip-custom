@@ -23,18 +23,18 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      - name: Create directory Media/ ; create file for tests
+        run : |
+          mkdir media/
+          touch ./media/file_3
+          ls -la media/
+          uname -a
+
+      - name: Run tests
+        run: python -m unittest tests/tests_s3service_moto.py
+
       - name: Build Package (create new version of package)
         run: python setup.py sdist bdist_wheel
-#  push_files_to_s3:
-#    runs-on: ubuntu-latest
-#    needs: [build_package_part]
-#   НЕ РОЗДІЛЯЄМО, все видалиться - DELETED
-#    steps:
-      - name: Print directory content
-        run : |
-          ls -la
-          ls -la dist/
-          uname -a
 
       - name: Configure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
